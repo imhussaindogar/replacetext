@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Find and Replace Text</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+<div class="container">
+  
+<h1>Find and Replace Text</h1>
+<p>Input Data</p>
+<textarea id="inputText"></textarea>
+<p>Find text</p>
+<input type="text" id="findWord" />
+<p>Replace with</p>
+<input type="text" id="replaceWord" />
+<p>Output:</p>
+<textarea id="outputText"></textarea>
+<button id="copyButton" class="toast-btn">Click to Copy</button>
+
+</div>
+<br>
+<!-- <div class="toast">
+  <p>Text Copied to Clipboard</p>
+</div> -->
+
+  <div class="toast">
+    <div class="toast-content">
+      <i class="uil uil-check toast-check"></i>
+      <div class="message">
+        <span class="message-text text-1">Success</span>
+        <span class="message-text text-2">Your changes has been saved</span>
+      </div>
+    </div>
+    <i class="uil uil-multiply toast-close"></i>
+    <div class="progress"></div>
+  </div>
+
+
+
+<script>
+// Get the input and output text areas
+const inputTextArea = document.getElementById("inputText");
+const outputTextArea = document.getElementById("outputText");
+const findWordInput = document.getElementById("findWord");
+const replaceWordInput = document.getElementById("replaceWord");
+const copyButton = document.getElementById("copyButton");
+
+// Find and replace text function
+function findAndReplace() {
+  // Get the text to find and replace
+  const findWord = findWordInput.value;
+  const replaceWord = replaceWordInput.value;
+
+  // Create a new string with the found words replaced
+  const newString = inputTextArea.value.replace(new RegExp(findWord, "g"), replaceWord);
+
+  // Set the output text area to the new string
+  outputTextArea.value = newString;
+}
+
+// Listen for changes to the input text areas
+inputTextArea.addEventListener("input", findAndReplace);
+findWordInput.addEventListener("input", findAndReplace);
+replaceWordInput.addEventListener("input", findAndReplace);
+
+
+// Listen for clicks on the copy button
+copyButton.addEventListener("click", function() {
+  // Get the text from the output text area
+  const text = outputTextArea.value;
+
+  // Copy the text to the clipboard
+  navigator.clipboard.writeText(text);
+
+  inputTextArea.value = "";
+  outputTextArea.value = "";
+  findWordInput.value ="";
+  replaceWordInput.value ="";
+  
+
+  // Display a toast message
+  const toast = document.querySelector(".toast");
+
+  toast.textContent = "Text copied to clipboard";
+  toast.style.display = "block";
+
+  // Hide the toast after 2 seconds
+  setTimeout(() => toast.style.display = "none", 2000);
+});
+
+
+var toast = document.querySelector(".toast");
+var btn = document.querySelector(".toast-btn");
+var close = document.querySelector(".toast-close");
+var progress = document.querySelector(".progress");
+
+btn.addEventListener("click", () =>{
+  toast.classList.add("active");
+  progress.classList.add("active");
+
+  setTimeout(() =>{
+    toast.classList.remove("active");
+  }, 5000)
+
+  setTimeout(() =>{
+    progress.classList.remove("active");
+  }, 5300)
+})
+
+close.addEventListener("click", () =>{
+  toast.classList.remove("active");
+
+  setTimeout(() =>{
+    progress.classList.remove("active");
+  }, 300)
+})
+</script>
+
+
+
+<style>
+  * {
+  box-sizing: border-box;
+}
+.toast{
+  display: none;
+}
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 10;
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+textarea {
+  width: 100%;
+  height: 140px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 16px;
+}
+
+input {
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 16px;
+}
+
+button {
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    width: 50%;
+  }
+}
+
+
+@media (max-width: 500px) {
+  .container {
+    width: 100%;
+  }
+}
+
+.find-and-replace-text {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.find-and-replace-text h2 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.find-and-replace-text input {
+  width: 50%;
+}
+
+.find-and-replace-text button {
+  float: right;
+}
+
+.find-and-replace-text output {
+  margin-top: 10px;
+}
+
+body{
+/*  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2;
+  overflow: hidden;*/
+}
+.toast{
+  position: absolute;
+  top: 25px;
+  right: 30px;
+  border-radius: 6px;
+  background: #fff;
+  padding: 20px 35px 20px 25px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  border-left: 8px solid #40f467;
+  overflow: hidden;
+  transform: translateX(calc(100% + 30px));
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.25, 1.35);
+}
+.toast.active{
+  transform: translateX(0);
+}
+.toast-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.toast-check{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  width: 35px;
+  background-color: #40f467;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 20px;
+}
+.message{
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+}
+.message-text{
+  font-size: 20px;
+  font-weight: 600;
+}
+.text-1{
+  color: #333;
+}
+.text-2{
+  color: #666;
+  font-weight: 400;
+  font-size: 16px;
+}
+.toast-close{
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  padding: 5px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+.toast-close:hover{
+  opacity: 1;
+}
+.progress{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: #ddd;
+}
+.progress::before{
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #40f467;
+}
+.progress.active::before{
+  animation: progress 5s linear forwards;
+}
+@keyframes progress {
+  100%{
+    right: 100%;
+  }
+}
+.toast-btn{
+  padding: 8px 20px;
+  font-size: 18px;
+  outline: none;
+  border: none;
+  background-color: #343a40;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  float: right;
+}
+.toast-btn:hover{
+  background-color: #0fbd35;
+}
+
+</style>
+</body>
+</html>
