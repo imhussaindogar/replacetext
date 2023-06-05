@@ -123,213 +123,241 @@ close.addEventListener("click", () =>{
 
 <style>
   * {
-  box-sizing: border-box;
-}
-.toast{
-  display: none;
-}
-body {
-  font-family: sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f0f0f0;
-}
-
-h1 {
-  text-align: center;
-  margin-top: 10;
-  margin-bottom: 20px;
-  font-size: 30px;
-  font-weight: bold;
-}
-
-p {
-  margin-bottom: 10px;
-}
-
-textarea {
-  width: 100%;
-  height: 140px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  font-size: 16px;
-}
-
-input {
-  width: 100%;
-  border: 1px solid #ccc;
-  padding: 10px;
-  font-size: 16px;
-}
-
-button {
-  background-color: #000;
-  color: #fff;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-@media (max-width: 768px) {
-  .container {
-    width: 100%;
+    box-sizing: border-box;
   }
-}
-
-@media (max-width: 576px) {
+  
+  .toast {
+    display: none;
+  }
+  
+  body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #333333;
+    color: #ffffff;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  
+  p {
+    margin-bottom: 10px;
+  }
+  
+  textarea {
+    width: 100%;
+    height: 140px;
+    border: 1px solid #555555;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #444444;
+    color: #ffffff;
+  }
+  
+  input {
+    width: 100%;
+    border: 1px solid #555555;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #444444;
+    color: #ffffff;
+  }
+  
+  button {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
   .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .container {
+      width: 50%;
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .container {
+      width: 100%;
+    }
+  }
+  
+  .find-and-replace-text {
+    border: 1px solid #555555;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #444444;
+  }
+  
+  .find-and-replace-text h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+  
+  .find-and-replace-text input {
     width: 50%;
+    background-color: #555555;
+    color: #ffffff;
   }
-}
-
-
-@media (max-width: 500px) {
-  .container {
+  
+  .find-and-replace-text button {
+    float: right;
+  }
+  
+  .find-and-replace-text output {
+    margin-top: 10px;
+    color: #ffffff;
+  }
+  
+  body {
+    /*height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #222222;
+    overflow: hidden;*/
+  }
+  
+  .toast {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    border-radius: 6px;
+    background: #333333;
+    padding: 20px 35px 20px 25px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    border-left: 8px solid #40f467;
+    overflow: hidden;
+    transform: translateX(calc(100% + 30px));
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.25, 1.35);
+  }
+  
+  .toast.active {
+    transform: translateX(0);
+  }
+  
+  .toast-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .toast-check {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 35px;
+    background-color: #40f467;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 20px;
+  }
+  
+  .message {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+  }
+  
+  .message-text {
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+  }
+  
+  .text-1 {
+    color: #cccccc;
+  }
+  
+  .text-2 {
+    color: #999999;
+    font-weight: 400;
+    font-size: 16px;
+  }
+  
+  .toast-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    padding: 5px;
+    cursor: pointer;
+    opacity: 0.7;
+  }
+  
+  .toast-close:hover {
+    opacity: 1;
+  }
+  
+  .progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
     width: 100%;
+    background: #555555;
   }
-}
-
-.find-and-replace-text {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 20px;
-}
-
-.find-and-replace-text h2 {
-  text-align: center;
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-.find-and-replace-text input {
-  width: 50%;
-}
-
-.find-and-replace-text button {
-  float: right;
-}
-
-.find-and-replace-text output {
-  margin-top: 10px;
-}
-
-body{
-/*  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f2f2f2;
-  overflow: hidden;*/
-}
-.toast{
-  position: absolute;
-  top: 25px;
-  right: 30px;
-  border-radius: 6px;
-  background: #fff;
-  padding: 20px 35px 20px 25px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  border-left: 8px solid #40f467;
-  overflow: hidden;
-  transform: translateX(calc(100% + 30px));
-  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.25, 1.35);
-}
-.toast.active{
-  transform: translateX(0);
-}
-.toast-content{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.toast-check{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 35px;
-  width: 35px;
-  background-color: #40f467;
-  border-radius: 50%;
-  color: #fff;
-  font-size: 20px;
-}
-.message{
-  display: flex;
-  flex-direction: column;
-  margin: 0 20px;
-}
-.message-text{
-  font-size: 20px;
-  font-weight: 600;
-}
-.text-1{
-  color: #333;
-}
-.text-2{
-  color: #666;
-  font-weight: 400;
-  font-size: 16px;
-}
-.toast-close{
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  padding: 5px;
-  cursor: pointer;
-  opacity: 0.7;
-}
-.toast-close:hover{
-  opacity: 1;
-}
-.progress{
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 3px;
-  width: 100%;
-  background: #ddd;
-}
-.progress::before{
-  content: "";
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
-  background-color: #40f467;
-}
-.progress.active::before{
-  animation: progress 5s linear forwards;
-}
-@keyframes progress {
-  100%{
-    right: 100%;
+  
+  .progress::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #40f467;
   }
-}
-.toast-btn{
-  padding: 8px 20px;
-  font-size: 18px;
-  outline: none;
-  border: none;
-  background-color: #343a40;
-  color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-  float: right;
-}
-.toast-btn:hover{
-  background-color: #0fbd35;
-}
-
+  
+  .progress.active::before {
+    animation: progress 5s linear forwards;
+  }
+  
+  @keyframes progress {
+    100% {
+      right: 100%;
+    }
+  }
+  
+  .toast-btn {
+    padding: 8px 20px;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    background-color: #343a40;
+    color: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    float: right;
+  }
+  
+  .toast-btn:hover {
+    background-color: #0fbd35;
+  }
 </style>
+
 </body>
 </html>
